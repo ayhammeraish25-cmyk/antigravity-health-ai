@@ -1,0 +1,212 @@
+.onboarding-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% 100%, #eff6ff 0%, var(--color-background) 100%);
+    padding: 1rem;
+}
+
+.wizard-card {
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-card);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 600px;
+}
+
+.wizard-header {
+    margin-bottom: 2rem;
+}
+
+.step-indicator {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: 0.5rem;
+    font-weight: var(--font-weight-medium);
+}
+
+.progress-track {
+    height: 6px;
+    background: var(--color-input-bg);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.wizard-content {
+    flex: 1;
+}
+
+.step-fade {
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h2 {
+    font-size: var(--font-size-2xl);
+    margin-bottom: 0.5rem;
+    color: var(--color-text-main);
+}
+
+.step-desc {
+    color: var(--color-text-secondary);
+    margin-bottom: 2rem;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-main);
+}
+
+input,
+select {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    font-size: var(--font-size-base);
+    font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: var(--color-input-bg);
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    background: white;
+}
+
+/* Cards Grid (Step 2) */
+.cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.selection-card {
+    border: 2px solid transparent;
+    background: var(--color-input-bg);
+    padding: 1.25rem;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.selection-card:hover {
+    background: white;
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.selection-card.selected {
+    border-color: var(--color-primary);
+    background: #eff6ff;
+}
+
+.card-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.selection-card h3 {
+    font-size: var(--font-size-base);
+    margin-bottom: 0.25rem;
+}
+
+.selection-card p {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+}
+
+/* List Cards (Step 3) */
+.cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.list-card {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: var(--color-input-bg);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.list-card.selected {
+    background: white;
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+}
+
+.list-card h3 {
+    font-size: var(--font-size-base);
+    margin: 0 1rem;
+    flex: 1;
+}
+
+.radio-circle {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-border);
+    border-radius: 50%;
+    position: relative;
+}
+
+.list-card.selected .radio-circle {
+    border-color: var(--color-primary);
+}
+
+.list-card.selected .radio-circle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background: var(--color-primary);
+    border-radius: 50%;
+}
+
+.wizard-actions {
+    display: flex;
+    align-items: center;
+    padding-top: 1rem;
+}
