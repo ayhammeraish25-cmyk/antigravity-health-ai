@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Layout from '../components/Layout';
 import Button from '../components/Button';
+import { useApp } from '../context/AppContext';
 import './Recipes.css';
 
 const RECIPE_DB = [
@@ -55,6 +56,8 @@ const Recipes = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [activeRecipe, setActiveRecipe] = useState(null);
 
+    const { logMeal } = useApp();
+
     const filteredRecipes = RECIPE_DB.filter(recipe => {
         const matchesSearch = recipe.title.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesCategory = selectedCategory === 'All' || recipe.category === selectedCategory;
@@ -62,8 +65,13 @@ const Recipes = () => {
     });
 
     const handleAddToLog = (recipe) => {
-        // In a real app, this would dispatch to a Context/Store
-        // For now, we simulate the feedback
+        logMeal({
+            name: recipe.title,
+            cal: recipe.cal,
+            p: recipe.protein,
+            c: 30, // Mock carb
+            f: 10  // Mock fat
+        });
         alert(`Added "${recipe.title}" to your Nutrition Checklist!`);
         setActiveRecipe(null);
     };

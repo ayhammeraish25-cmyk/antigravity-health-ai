@@ -8,8 +8,37 @@
     position: fixed;
     left: 0;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
+    /* Higher z-index for mobile drawer */
     padding: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.mobile-close-btn {
+    display: none;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .sidebar.mobile-open {
+        transform: translateX(0);
+    }
+
+    .mobile-close-btn {
+        display: block;
+    }
 }
 
 .sidebar-logo {

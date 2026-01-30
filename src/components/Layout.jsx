@@ -1,29 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import './Layout.css';
 
 const Layout = ({ children }) => {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
     return (
         <div className="app-layout">
-            <Sidebar />
-            <main className="main-content">
-                <header className="topbar">
-                    <div className="page-title">
-                        <h1>Dashboard</h1>
-                        <p className="current-date">{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
-                    </div>
-                    <div className="topbar-actions">
-                        <div className="streak-badge">
-                            <span>🔥</span>
-                            <strong>7 Day Streak</strong>
-                        </div>
-                        <button className="icon-btn">🔔</button>
-                    </div>
+
+            {/* Sidebar */}
+            <Sidebar
+                isOpen={isMobileMenuOpen}
+                onClose={() => setIsMobileMenuOpen(false)}
+            />
+
+            {/* Main Content */}
+            <div className="main-content">
+
+                {/* Header */}
+                <header className="top-header">
+                    <button
+                        className="hamburger-btn"
+                        onClick={() => setIsMobileMenuOpen(true)}
+                    >
+                        ☰
+                    </button>
+                    <h1 className="app-title">Antigravity</h1>
                 </header>
+
+                {/* Page Content */}
                 <div className="content-area">
                     {children}
                 </div>
-            </main>
+
+            </div>
         </div>
     );
 };

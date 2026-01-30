@@ -23,7 +23,7 @@ const LandingPage = () => {
                     <a href="#pricing">Plans</a>
                 </div>
                 <div className="nav-actions">
-                    <Button variant="text" className="btn-signin">Sign in</Button>
+                    <Button variant="text" className="btn-signin" onClick={() => navigate('/login')}>Sign in</Button>
                     <Button variant="secondary" onClick={handleGetStarted}>Get Started</Button>
                 </div>
             </nav>

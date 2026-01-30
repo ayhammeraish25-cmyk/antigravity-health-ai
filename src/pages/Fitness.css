@@ -181,7 +181,50 @@
 }
 
 @media (max-width: 768px) {
+    .fitness-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .tabs {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .tab-btn {
+        flex: 1;
+        padding: 0.5rem;
+    }
+
+    .routines-grid {
+        grid-template-columns: 1fr;
+    }
+
     .week-grid {
         grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
+    }
+
+    .workout-header-main {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .exercise-item-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .ex-targets {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 480px) {
+    .week-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 }

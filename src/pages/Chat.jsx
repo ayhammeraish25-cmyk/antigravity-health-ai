@@ -1,11 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Layout from '../components/Layout';
 import Button from '../components/Button';
-import './ChatData.css'; // Reusing or new CSS
+import { useApp } from '../context/AppContext';
+import { aiService } from '../services/api';
+import './ChatData.css';
 
 const Chat = () => {
+    const { user, today } = useApp();
     const [messages, setMessages] = useState([
-        { id: 1, sender: 'ai', text: 'Hello Ahmed! I am FitAI. How can I help you reach your goals today?' }
+        { id: 1, sender: 'ai', text: `Hello ${user.name || 'Friend'}! I am FitAI. Ask me about your progress today!` }
     ]);
     const [input, setInput] = useState('');
     const messagesEndRef = useRef(null);
@@ -18,22 +21,30 @@ const Chat = () => {
         scrollToBottom();
     }, [messages]);
 
-    const handleSend = () => {
+    const handleSend = async () => {
         if (!input.trim()) return;
 
         const userMsg = { id: Date.now(), sender: 'user', text: input };
         setMessages(prev => [...prev, userMsg]);
         setInput('');
 
-        // Simulate AI Response
-        setTimeout(() => {
+        // Call Backend API
+        try {
+            const aiResponse = await aiService.sendMessage(input);
             const aiMsg = {
                 id: Date.now() + 1,
                 sender: 'ai',
-                text: 'That is a great question! Based on your goal of muscle gain, I recommend focusing on progressive overload and ensuring you hit your protein target of 140g daily.'
+                text: aiResponse.content
             };
             setMessages(prev => [...prev, aiMsg]);
-        }, 1000);
+        } catch (error) {
+            const errorMsg = {
+                id: Date.now() + 1,
+                sender: 'ai',
+                text: "I'm having trouble connecting to my brain right now. Please try again later."
+            };
+            setMessages(prev => [...prev, errorMsg]);
+        }
     };
 
     const handleKeyPress = (e) => {
@@ -48,7 +59,7 @@ const Chat = () => {
                         <div className="ai-avatar">✨</div>
                         <div>
                             <h3>FitAI Assistant</h3>
-                            <span className="status-online">Online</span>
+                            <span className="status-online">Online • Context Aware</span>
                         </div>
                     </div>
 
@@ -64,7 +75,7 @@ const Chat = () => {
                     <div className="chat-input-area">
                         <input
                             type="text"
-                            placeholder="Ask about workouts, nutrition..."
+                            placeholder="Ask: 'How is my hydration?' or 'Did I workout?'"
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             onKeyPress={handleKeyPress}
